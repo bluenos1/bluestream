@@ -43,4 +43,11 @@ ssrn = st.sidebar.selectbox('검색 유형을 선택하세요', srn)
 name = st.sidebar.text_input(label="검색어를 입력해주세요")
 resout(name, ssrn)
 
+myFile2 = st.file_uploader('파일선택')
+out2 = st.empty()
+
+if myFile2:
+    out2.write('업로드성공')
+    mytxt = StringIO(myFile2.getvalue().decode('utf-8')).read()
+    st.code(mytxt)
 
