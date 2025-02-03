@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import sqlite3
-import os
 
 def resout(sdata, squer1):
     if len(sdata)>=3:
@@ -49,6 +48,6 @@ out2 = st.empty()
 
 if upload_file:
     con3 = sqlite3.connect(upload_file.name)
-    df2 = pd.read_sql('SELECT * FROM DATA', con3, index_col='index')
+    df2 = pd.read_sql("SELECT * FROM DATA", con3, index_col='index')
     st.write(df2)
     con3.close()
