@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import sqlite3
+import os
 
 def resout(sdata, squer1):
     if len(sdata)>=3:
@@ -47,5 +48,11 @@ upload_file = st.sidebar.file_uploader('DB업로드')
 out2 = st.empty()
 
 if upload_file:
-    df2 = pd.read_csv(upload_file.name)
+    if not os.path.exists('DB'):
+        os.makedirs('DB')
+    with open(os.path.join('DB', upload_file.name), 'wb') as f:
+        f.write(upload_file.getbuffer())
+    con3 = sqlite3.connect('DB/'+upload_file.name)
+    df2 = pd.read_sql("SELECT * FROM DATA", con3, index_col='index')
     st.write(df2)
+    con3.close()
