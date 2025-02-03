@@ -20,10 +20,10 @@ def resout(sdata, squer1):
 
             ## 용량별 매출
             a = dfa.groupby('용량')
-            st.write('･용량별 매출')
-            st.write('\n', a.sum().iloc[0:, 42:47])
+            st.write('\n･용량별 매출')
+            st.write(a.sum().iloc[0:, 42:47])
 
-            st.write('･연도별 매출 그래프')
+            st.write('\n･연도별 매출 그래프')
             k = a.sum().transpose()
             st.bar_chart(k.iloc[42:47, 0:])
 
