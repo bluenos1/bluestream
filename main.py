@@ -4,7 +4,7 @@ import sqlite3
 import os
 
 def resout(sdata, squer1):
-    if len(sdata)>=3:
+    if len(sdata)>=2:
         ## DB 연결
         squer2 = '%' + sdata + '%'
         con = sqlite3.connect('DB/IMSDATA2024.db')
@@ -33,7 +33,7 @@ def resout(sdata, squer1):
             con.commit()
             con.close()
     else:
-        st.write('3글자 이상 입력해 주세요.')
+        st.write('2글자 이상 입력해 주세요.')
 
 
 ## 페이지 레이아웃
