@@ -24,7 +24,8 @@ def resout(sdata, squer1):
             st.write('\n', a.sum().iloc[0:, 42:47])
 
             st.write('･연도별 매출 그래프')
-            st.bar_chart(a.sum().iloc[0, 42:47])
+            k = a.sum().transpose()
+            st.bar_chart(k.iloc[42:47, 0:])
 
             st.write('･제품별 매출')
             st.dataframe(dfa[['Audit desc.','제품명','성분명','용량','급여구분','MAT20Q3','MAT21Q3','MAT22Q3','MAT23Q3','MAT24Q3']])
@@ -42,10 +43,13 @@ st.sidebar.header('검색')
 srn = ['성분명','제품명']
 ssrn = st.sidebar.selectbox('검색 유형을 선택하세요', srn)
 name = st.sidebar.text_input(label="검색어를 입력해주세요")
+st.sidebar.subheader('',divider='gray')
+
 resout(name, ssrn)
 
 upload_file = st.sidebar.file_uploader('DB업로드')
 out2 = st.empty()
+st.sidebar.markdown('*DB ver. 2024Q3*')
 
 if upload_file:
     if not os.path.exists('DB'):
