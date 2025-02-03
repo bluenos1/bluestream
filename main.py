@@ -7,7 +7,7 @@ def resout(sdata, squer1):
     if len(sdata)>=3:
         ## DB 연결
         squer2 = '%' + sdata + '%'
-        con = sqlite3.connect('TESTDB.db')
+        con = sqlite3.connect('DB/IMSDATA2024.db')
         dfa = pd.read_sql('SELECT * FROM DATA WHERE "%s" LIKE "%s"' % (squer1, squer2), con, index_col='index')
         if dfa.shape[0] == 0:
             st.write('검색결과가 없습니다.')
