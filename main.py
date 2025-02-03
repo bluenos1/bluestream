@@ -7,7 +7,7 @@ def resout(sdata, squer1):
     if len(sdata)>=3:
         ## DB 연결
         squer2 = '%' + sdata + '%'
-        con = sqlite3.connect('IMSDATA2024.db')
+        con = sqlite3.connect('TESTDB.db')
         dfa = pd.read_sql('SELECT * FROM DATA WHERE "%s" LIKE "%s"' % (squer1, squer2), con, index_col='index')
         if dfa.shape[0] == 0:
             st.write('검색결과가 없습니다.')
@@ -44,3 +44,13 @@ ssrn = st.sidebar.selectbox('검색 유형을 선택하세요', srn)
 name = st.sidebar.text_input(label="검색어를 입력해주세요")
 resout(name, ssrn)
 
+upload_file = st.sidebar.file_uploader('DB업로드')
+out2 = st.empty()
+
+if upload_file:
+    con3 = sqlite3.connect(upload_file.name)
+    df2 = pd.read_sql('SELECT * FROM DATA', con3, index_col='index')
+    con2 = sqlite3.connect('TESTDB.db')
+    df2.to_sql('DATA', con2)
+    con3.close()
+    con2.close()
