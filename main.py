@@ -50,7 +50,5 @@ out2 = st.empty()
 if upload_file:
     con3 = sqlite3.connect(upload_file.name)
     df2 = pd.read_sql('SELECT * FROM DATA', con3, index_col='index')
-    con2 = sqlite3.connect('TESTDB.db')
-    df2.to_sql('DATA', con2)
+    st.write(df2)
     con3.close()
-    con2.close()
